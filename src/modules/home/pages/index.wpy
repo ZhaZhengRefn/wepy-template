@@ -1,0 +1,228 @@
+<template>
+  <view class="page--home-index">
+    <!-- 数据内容块 -->
+    <IndexContent
+      :isJoined.sync="isJoined"
+      :avatar.sync="avatar"
+      :level.sync="level"
+      :week.sync="week"
+      :date.sync="date"
+      :usefulTime.sync="usefulTime"
+      :lastUsefulTime.sync="lastUsefulTime"
+      :timeRatio.sync="timeRatio"
+      :timeProgresses.sync="timeProgresses"
+      :classmates.sync="classmates"
+      :isClassmateVisited.sync="isClassmateVisited"
+    ></IndexContent>
+    <IndexRecord
+      :records.sync="timeRecords"
+    ></IndexRecord>    
+    <!-- 记录按钮 -->
+    <view class="btn-wrap">
+      <view class="record-confirmBtn" @tap="routeToRecord">
+          {{hasAnyRecords ? '时间记录' : '添加记录'}}
+      </view>       
+    </view>   
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import { onceInSeconds, isToday } from '@lib/util'
+  import { TYPE_TO_TAG, TYPE_TO_TEXT, VIEW_CLASSMATE } from '@config/constant'
+  import { addProgressClass, addUiState, limitRatio } from '../model/index'
+  import IndexContent from '../components/index-content'
+  import IndexRecord from '../components/index-record'
+  import DecodeMixin from '@modules/common/mixins/decode'
+
+  export default class Index extends wepy.page {
+    config = {
+      "enablePullDownRefresh": true,
+      "backgroundTextStyle": "dark"
+    }
+
+    // mixins = [DecodeMixin]
+
+    components = {
+      IndexContent,
+      IndexRecord
+    }
+
+    data = {
+      isClassmateVisited: false,
+      id: '',
+      shareTitle: '时间记账本',
+      isJoined: true,
+      avatar:'',
+      level: '1',
+      week: 1,
+      date:'',
+      usefulTime:'',
+      lastUsefulTime:'',
+      timeRatio:'0%',
+      timeProgresses: [],
+      classmates: [],
+      timeRecords: [],
+    }
+
+    computed = {
+        hasAnyRecords(){
+            return this.timeRecords && Array.isArray(this.timeRecords) && this.timeRecords.length > 0
+        },
+        shareOption(){
+          if(this.hasAnyRecords){
+            return {
+              title: this.shareTitle,
+              path: '/modules/share/pages/today?id=' + this.id,
+              success(res){
+                // if(res.errMsg === "shareAppMessage:ok"){
+                //   console.log('转发成功')
+                // }
+              }
+            }
+          } else {
+            return null
+          }
+        }
+    }
+
+    methods = {
+      routeToRecord: onceInSeconds(function(){
+        getApp().sensors.track('ButtonClick', {
+          ButtonMP: 'TimeRecord'
+        })
+        this.$navigate('../../record/pages/index')
+      }, this, 2000),      
+    }
+
+    events = {
+      routeToClassmate: onceInSeconds(function(){
+          this.$navigate('../../classmate/pages/index')
+      }, this, 2000),
+      routeToStatistic: onceInSeconds(function(){
+        this.$navigate('../../statistic/pages/index')
+      }, this, 2000),
+    }
+
+    onShow(){
+      const timeGroup = wx.getStorageSync(VIEW_CLASSMATE)
+      if(timeGroup && Array.isArray(timeGroup) && timeGroup.length >= 2){
+        let [ cur, status ] = timeGroup
+        this.isClassmateVisited = status
+        this.$apply()
+      }      
+    }
+
+    resetData(start = function(){}, end = function(){}){
+      // wx.showLoading()
+      start()
+      this.$parent.apis.getHomeIndex()
+      .then(({
+        data: {
+          desc: shareTitle,
+          image_url: imageUrl,
+          join: isJoined,
+          avatar,
+          level,
+          week_index: week,
+          date,
+          useful_time: usefulTime,
+          yesterday_useful_time: lastUsefulTime,
+          useful_of_day: timeRatio,
+          time_data: timeProgresses,
+          group_avatar: classmates,
+          time_records: timeRecords,
+          user_id: id
+        }
+      }) => {
+        this.id = id
+        this.shareTitle = shareTitle
+        this.imageUrl = imageUrl
+        this.isJoined = isJoined
+        this.avatar = avatar
+        this.level = level
+        this.week = week
+        this.date = date
+        this.usefulTime = usefulTime
+        this.lastUsefulTime = lastUsefulTime
+        this.timeRatio = limitRatio(timeRatio)
+        this.timeProgresses = addProgressClass(timeProgresses, TYPE_TO_TAG)
+        this.classmates = classmates
+        this.timeRecords = addUiState(timeRecords, TYPE_TO_TAG, TYPE_TO_TEXT)
+
+        end()
+        // wx.hideLoading()
+        this.$apply()
+      })
+      .catch(e => {
+        end()
+        // wx.hideLoading()
+      })      
+    }
+
+    onLoad() {
+      // const decode = this.decodeToken()
+      // if(decode){
+      //   this.id = decode.id
+      // } else {
+      //   console.warn('can not decode jwt')
+      //   this.$redirect('../../common/pages/auth')
+      // }
+
+      this.resetData(
+        () => { wx.showLoading() },
+        () => { wx.hideLoading() }
+      )
+    }
+
+    onShareAppMessage(){
+      return this.shareOption
+    }    
+
+    onPullDownRefresh(){
+      this.resetData(
+        undefined,
+        () => { wx.stopPullDownRefresh() }
+      )
+    }
+  }
+</script>
+
+<style lang="scss">
+@import '../common.scss';
+  .page--home-index{
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    padding-bottom: pr(85.5);
+    .btn-wrap{
+      @include flex();
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      bottom: pr(0);
+      width: 100%;
+      box-sizing: border-box;
+      height: 180rpx;
+      // padding: pr(19) 0;
+      z-index: 999;
+      // background-color: #fff;
+      background-image: linear-gradient(-180deg, rgba(255,255,255,0.00) 0%, #FFFFFF 50%);
+      .record-confirmBtn{
+          @include flex();
+          justify-content: center;
+          // margin-top: pr(20);
+          width: pr(335);
+          height: pr(47.5);
+          font-size: pr(18);
+          font-weight: 500;
+          color: #ffffff;        
+          border-radius: pr(5);
+          background-color: #3379ff;
+          &:active{
+              background-color: #3399FF;
+          }
+      }        
+    }
+  }
+</style>

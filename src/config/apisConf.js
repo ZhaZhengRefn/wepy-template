@@ -1,0 +1,1 @@
+export default {"getHomeIndex":{"path":"/time/index"}}

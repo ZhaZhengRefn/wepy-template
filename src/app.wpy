@@ -1,0 +1,67 @@
+<style lang="scss">
+@import './style/iconfont.scss';
+page{
+  width: 100%;
+  height: 100%;
+    &::before{
+      position: fixed;
+      z-index: 999;
+      top: 0;
+      left: 0;
+      display: block;
+      content: '';
+      width: 100%;
+      height: 1rpx;
+      background-color: rgba(219,219,219,0.50);
+    }    
+}
+</style>
+
+<script>
+var sensors = require('./lib/sensorsdata.js');
+
+import wepy from 'wepy';
+import 'wepy-async-function';
+import apis from './config/apis';
+import { TOKEN } from '@config/constant';
+import { getJWT, setToken } from '@lib/util';
+import { globalEvent } from '@lib/event';
+import { GlobalAuth } from '@lib/authorizer/index';
+
+export default class extends wepy.app {
+  config = {
+    pages: ['modules/home/pages/index', 'modules/common/pages/webview', 'modules/common/pages/auth'],
+    window: {
+      backgroundTextStyle: 'light',
+      navigationBarBackgroundColor: '#fff',
+      navigationBarTitleText: '时间记账本',
+      navigationBarTextStyle: 'black'
+    }
+  };
+
+  globalData = {
+    isIpx: false
+    // userInfo: null
+  };
+
+  apis = apis;
+
+  constructor() {
+    super();
+    this.use('promisify');
+  }
+
+  onLaunch() {
+    wepy.getSystemInfo().then(({ model }) => {
+      if (model.indexOf('iPhone X') > -1) {
+        app.globalData.isIpx = true;
+      }
+    });
+
+    const localToken = getJWT();
+
+    if (!localToken) {
+      GlobalAuth.run();
+    }
+  }
+}</script>

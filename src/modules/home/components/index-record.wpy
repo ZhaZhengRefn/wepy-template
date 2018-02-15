@@ -1,0 +1,296 @@
+<template>
+    <view class="component--index-record {{hasAnyRecords ? 'hasAnyRecords':''}}">
+        <!-- 记录头部 -->
+        <view class="record-header" wx:if="{{hasAnyRecords}}">
+            <text class="record-text">今日记录</text>
+            <view class="record-share">
+                分享
+                <text class="ic-share">
+                </text>
+                <button
+                    class="shareBtn"
+                    open-type="share"
+                ></button>
+            </view>
+        </view>
+        <!-- 记录列表 -->
+        <view class="record-list-wrap" wx:if="{{hasAnyRecords}}">
+            <view 
+                class="record-item-wrap"
+                wx:for="{{records}}"
+                wx:key="{{index}}"            
+            >
+                <view class="record-item {{item.lengthClass}}">
+                    <view class="item-content">
+                        <view class="item-tag {{item.tagClass}}">
+                            <view class="ic-round">
+                            </view>
+                            <view class="tag-text">
+                                {{item.tagText}}
+                            </view>
+                        </view>
+                        <view class="item-desc">
+                            {{item.title}}
+                        </view>                
+                    </view>
+                    <view class="item-time">
+                        {{item.time}}分钟
+                    </view>
+                </view>
+            </view>
+        </view>
+        <view class="record-none-wrap" wx:else>
+            <image
+                class="record-none-pic"
+                src="../assets/record-none.png"
+                mode="aspectFill"
+            ></image>
+            <view class="record-none-title">
+                今天还没有时间记录
+            </view>
+            <view class="record-none-subtitle">
+                快行动起来，记录自己的成长
+            </view>
+        </view>
+        <!-- 记录按钮 -->
+        <!-- <view class="record-confirmBtn" @tap="routeToRecord">
+            {{hasAnyRecords ? '时间记录' : '添加记录'}}
+        </view> -->
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class IndexRecord extends wepy.component {
+    props = {
+        records: {
+            type: Array,
+            default: []
+        }
+    }
+
+    data = {
+
+    }
+
+    computed = {
+        hasAnyRecords(){
+            return this.records && Array.isArray(this.records) && this.records.length > 0
+        }
+    }
+
+    methods = {
+        routeToRecord(){
+            this.$emit('routeToRecord')
+        }
+    }
+
+    typeToTag(type) {
+        switch (type) {
+            case 1:
+                return 'valuable'
+            case 2:
+                return 'efficient'
+            case 3:
+                return 'valid'
+            default:
+                return ''
+        }
+    }
+}
+</script>
+
+<style lang="scss">
+@import '../common.scss';
+.component--index-record{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 pr(15);
+    &.hasAnyRecords{
+        padding-top: pr(21);
+    }
+    .record-header{
+        margin-bottom: pr(15);
+        @include flex();
+        justify-content: space-between;
+        width: 100%;
+        height: pr(25);      
+        .record-text{
+            font-size: pr(17);
+            font-weight: 500;
+            color: #000;
+        }
+        .record-share{
+            position: relative;
+            @include flex();
+            // width: 70px;
+            padding: 0 pr(9) 0 pr(13.5);
+            height: pr(25);
+            border-radius: pr(15);
+            background-color: #e5e5e5;
+            font-size: pr(14);
+            font-weight: 600;
+            color: #3379ff;
+            .ic-share{
+                padding-left: pr(1.5);
+                font-size: pr(20);
+                font-weight: normal;
+            }
+            &:active{
+                opacity: 0.8;
+            }
+            .shareBtn{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                opacity: 0;
+                // background-color: transparent;
+                // font-size: 0;
+            }
+        }        
+    }
+    .record-item-wrap{
+        display: inline-block;
+        margin-bottom: pr(11);
+        border-radius: pr(5);
+        background-color: #ffffff;
+        box-shadow: 0 0 pr(10) 0 #e5e5e5;
+    }
+    .record-list-wrap{
+        @include flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 100%;
+        // margin-bottom: pr(20);
+    }
+    .record-item{
+        width: pr(215);
+        height: pr(60);
+        @include flex;
+        box-sizing: border-box;
+        padding: 0 pr(15) 0 pr(12);
+        &.medium{
+            width: pr(283);
+            .item-content{
+                .item-desc{
+                    max-width: pr(120);
+                }
+            }
+        }
+        &.max{
+            width: pr(345);
+            .item-content{
+                .item-desc{
+                    max-width: pr(165);
+                }
+            }            
+        }
+        .item-content{
+            @include flex();
+            flex-flow: row nowrap;
+            .item-tag{
+                position: relative;
+                width: pr(58);
+                // height: 54rpx;
+                height: pr(17);
+                box-sizing: border-box;
+                padding-left: pr(10);
+                border-radius: pr(5);
+                color: #fff;
+                font-size: pr(11);
+                font-weight: 500;
+                .ic-round{
+                    position: absolute;
+                    top: 50%;
+                    left: pr(5);
+                    transform: translateY(-50%);
+                    font-size: pr(8);
+                    line-height: 1;
+                    font-weight: 100;
+                }
+                .tag-text{
+                    position: relative;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    width: 100%;
+                    @include flex();
+                    justify-content: center;
+                }
+                &.valuable{
+                    background-color: #ff4b33;                
+                }            
+                &.efficient{
+                    background-color: #6dc95b;                
+                }            
+                &.valid{
+                    background-color: #ffd133;                
+                }            
+            }
+            .item-desc{
+                @include oneLine;
+                max-width: pr(75);
+                margin-left: pr(9);
+                font-size: pr(15);
+                font-weight: 500;
+                color: #000000;                
+            }
+        }
+        .item-time{
+            font-size: pr(14);
+            font-weight: 500;
+            color: #b2b2b2;            
+        }
+    }
+    .record-none-wrap{
+        margin-bottom: pr(15);
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        .record-none-pic{
+            margin-top: pr(29);
+            width: pr(130);
+            height: pr(90);
+        }        
+        .record-none-title{
+            margin-top: pr(10);
+            font-size: pr(15);
+            font-weight: 600;
+            text-align: center;
+            color: #736c68;            
+        }
+        .record-none-subtitle{
+            line-height: pr(18);
+            font-size: pr(12);
+            font-weight: 500;
+            line-height: 1.5;
+            text-align: center;
+            color: #ada9a7;            
+        }
+    }
+    // .record-confirmBtn{
+    //     @include flex();
+    //     justify-content: center;
+    //     // margin-top: pr(20);
+    //     width: pr(335);
+    //     height: pr(47.5);
+    //     font-size: pr(18);
+    //     font-weight: 500;
+    //     color: #ffffff;        
+    //     border-radius: pr(5);
+    //     background-color: #3379ff;
+    //     &:active{
+    //         opacity: 0.8;
+    //     }
+    // }
+}
+</style>

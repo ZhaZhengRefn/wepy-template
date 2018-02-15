@@ -1,0 +1,1 @@
+module.exports = [{"name":"common-webview","page":"modules/common/pages/webview"},{"name":"common-auth","page":"modules/common/pages/auth"},{"name":"home-index","page":"modules/home/pages/index","meta":{"weight":100}}]

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="750px" height="900px" viewBox="0 0 750 900" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>Rectangle 3</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="90.0999986" y="455.399988" width="573.299985" height="124.199997" rx="7.19999981"></rect>
+        <filter x="-8.4%" y="-38.6%" width="116.7%" height="177.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="16" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.695528756   0 0 0 0 0.783317821   0 0 0 0 0.951371173  0 0 0 0.72619452 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="74.799999" y="567.899985" width="602.999984" height="124.199997" rx="7.19999981"></rect>
+        <filter x="-8.0%" y="-38.6%" width="115.9%" height="177.3%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="16" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.695528756   0 0 0 0 0.783317821   0 0 0 0 0.951371173  0 0 0 0.72619452 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="小程序-微信授权" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(0.000000, -176.000000)">
+        <g id="Group" transform="translate(0.000000, 176.000000)">
+            <rect id="Rectangle-3" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="750" height="899.999976"></rect>
+            <rect id="Rectangle-21" fill="#FFFFFF" x="125.199998" y="48.5999987" width="501.299987" height="766.79998" rx="7.19999981"></rect>
+            <rect id="Rectangle-4" fill="#E8ECF1" opacity="0.533061594" x="125.199998" y="133.199996" width="501.299987" height="8.99999976"></rect>
+            <rect id="Rectangle-3-Copy-2" fill="#E6ECF4" x="156.699997" y="209.699994" width="437.399988" height="74.699998" rx="4.49999988"></rect>
+            <rect id="Rectangle-3-Copy-3" fill="#E6ECF4" x="156.699997" y="350.999991" width="437.399988" height="26.9999993" rx="5.39999986"></rect>
+            <g id="Rectangle-2-Copy">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <g id="Rectangle-2">
+                <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-3"></use>
+            </g>
+            <rect id="Rectangle" fill-opacity="0.266983696" fill="#3379FF" x="177.399996" y="718.199981" width="395.99999" height="70.1999981" rx="7.19999981"></rect>
+            <text id="学习-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="32.3999991" font-weight="400" fill="#000000">
+                <tspan x="220.599995" y="642.399984">学习</tspan>
+            </text>
+            <rect id="Rectangle-2-Copy-6" fill="#6DC95B" x="99.9999983" y="609.299984" width="104.399997" height="44.0999988" rx="8.99999976"></rect>
+            <text id="高效-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="19.7999995" font-weight="400" fill="#FFFFFF">
+                <tspan x="141.399997" y="639.299984">高效</tspan>
+            </text>
+            <circle id="Oval-5-Copy-3" stroke="#FFFFFF" stroke-width="3.5999999" cx="126.999998" cy="631.799983" r="5.39999986"></circle>
+            <text id="120分钟-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="25.1999993" font-weight="400" fill="#B2B2B2">
+                <tspan x="562.599986" y="638.999984">120分钟</tspan>
+            </text>
+            <text id="阅读-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="32.3999991" font-weight="400" fill="#000000">
+                <tspan x="236.799995" y="528.999987">阅读</tspan>
+            </text>
+            <rect id="Rectangle-2-Copy-3" fill="#FF4B33" x="116.199998" y="495.899987" width="104.399997" height="44.0999988" rx="8.99999976"></rect>
+            <text id="有价值-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="19.7999995" font-weight="400" fill="#FFFFFF">
+                <tspan x="147.699997" y="524.999987">有价值</tspan>
+            </text>
+            <circle id="Oval-5-Copy-3" stroke="#FFFFFF" stroke-width="3.5999999" cx="134.199997" cy="518.399986" r="5.39999986"></circle>
+            <text id="30分钟-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="25.1999993" font-weight="400" fill="#B2B2B2">
+                <tspan x="555.399986" y="526.499987">30分钟</tspan>
+            </text>
+            <text id="今日有效时间-copy" font-family="PingFangSC-Medium, PingFang SC" font-size="21.5999994" font-weight="400" fill="#7F7F7F">
+                <tspan x="156.699997" y="196.699995">今日有效时间</tspan>
+            </text>
+            <text id="今日有益时间占比" font-family="PingFangSC-Medium, PingFang SC" font-size="21.5999994" font-weight="400" fill="#7F7F7F">
+                <tspan x="156.699997" y="338.899992">今日有益时间占比</tspan>
+            </text>
+            <text id="今日记录" font-family="PingFangSC-Medium, PingFang SC" font-size="21.5999994" font-weight="400" fill="#7F7F7F">
+                <tspan x="156.699997" y="437.899989">今日记录</tspan>
+            </text>
+            <text id="Label-Copy" font-family="PingFangSC-Medium, PingFang SC" font-size="30.5999992" font-weight="400" fill="#000000">
+                <tspan x="298.899993" y="103.999998">时间记账本</tspan>
+            </text>
+            <path d="M165.181437,107.692291 L152.232961,94.7438149 C152.18949,94.5070919 152.18853,94.2208104 152.232961,93.9821399 L165.181437,81.0336637 C165.281376,80.9901367 165.562961,80.9874354 165.943113,81.0336637 L167.466463,82.5570138 C167.509856,82.9548257 167.511926,83.2417572 167.466463,83.3186889 L156.803012,93.9821399 C156.650052,94.2179742 156.647012,94.5058865 156.803012,94.7438149 L167.466463,105.407266 C167.508886,105.482104 167.513406,105.76852 167.466463,106.168941 L165.943113,107.692291 C165.566511,107.73591 165.282335,107.737766 165.181437,107.692291 Z" id="Rectangle--Copy" fill="#000000" opacity="0.16553442"></path>
+            <path d="M566.199986,92.2499976 C566.199986,94.4864075 564.386396,96.2999974 562.149986,96.2999974 C559.913576,96.2999974 558.099986,94.4864075 558.099986,92.2499976 C558.099986,90.0127776 559.913576,88.1999977 562.149986,88.1999977 C564.386396,88.1999977 566.199986,90.0127776 566.199986,92.2499976 Z M576.099986,85.4999977 C579.578846,85.4999977 582.399986,88.3198777 582.399986,91.7999976 C582.399986,95.2788575 579.578846,98.0999974 576.099986,98.0999974 C572.621126,98.0999974 569.799986,95.2788575 569.799986,91.7999976 C569.799986,88.3198777 572.621126,85.4999977 576.099986,85.4999977 Z M591.849985,88.1999977 C594.086395,88.1999977 595.899985,90.0127776 595.899985,92.2499976 C595.899985,94.4864075 594.086395,96.2999974 591.849985,96.2999974 C589.613575,96.2999974 587.799985,94.4864075 587.799985,92.2499976 C587.799985,90.0127776 589.613575,88.1999977 591.849985,88.1999977 Z" id="Fill--Copy" fill="#000000" opacity="0.271059783"></path>
+            <text id="新建时间记录" font-family="PingFangSC-Medium, PingFang SC" font-size="26.9999993" font-weight="400" fill="#FFFFFF">
+                <tspan x="294.399993" y="763.399981">新建时间记录</tspan>
+            </text>
+        </g>
+    </g>
+</svg>

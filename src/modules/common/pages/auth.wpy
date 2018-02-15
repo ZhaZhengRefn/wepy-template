@@ -1,0 +1,129 @@
+<template>
+    <view class="page--common-auth">
+        <image
+            class="auth-bg"
+            src="../assets/auth-bg.svg"
+        ></image>
+        <view class="auth-bg-shadow">
+        </view>
+        <view class="auth-notice">
+            授权登录，开启你的时间记录
+        </view>
+        <view class="auth-confirmBtn" @tap="confirmAuth">
+            授权微信登录
+        </view>
+        <view class="auth-failToast" wx:if="{{isShowToast}}">
+            <view class="fail-title">
+                授权微信失败
+            </view>
+            <view class="fail-subtitle">
+                请再次授权试试
+            </view>
+        </view>
+    </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import { getJWT, onceInSeconds } from '@lib/util'
+import {GlobalAuth} from '@lib/authorizer/index'
+import { globalEvent } from '@lib/event'
+
+export default class CommonAuth extends wepy.page {
+    data = {
+        isShowToast: false
+    }
+
+    methods = {
+        confirmAuth: onceInSeconds(function(){
+            GlobalAuth.run(2)
+            globalEvent.on('authFailToast', () => {
+                this.isShowToast = true
+                this.$apply()
+                setTimeout(() => {
+                    this.isShowToast = false
+                    this.$apply()
+                }, 1000)                
+            })
+        }, this, 4000)
+    }
+}
+</script>
+
+<style lang="scss">
+@import '../common.scss';
+.page--common-auth{
+    position: relative;
+    @include flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    // box-sizing: border-box;
+    // padding-bottom: 68rpx;
+    background-color: #3379FF;
+    .auth-bg{
+        width: 750rpx;
+        height: 900rpx;
+    }
+    .auth-bg-shadow{
+        margin-top: -52rpx;
+        margin-bottom: 30rpx;
+        width: 430rpx;
+        height: 26rpx;
+        border-radius: 50%;
+        filter: blur(3rpx);
+        background-color: #266df4;        
+    }
+    .auth-notice{
+        // margin-top: pr(22.5);
+        opacity: 0.53;
+        font-size: pr(16);
+        color: #ffffff;        
+    }
+    .auth-confirmBtn{
+        margin-top: pr(9.5);
+        @include flex;
+        justify-content: center;
+        width: pr(263.5);
+        height: pr(56);
+        border-radius: pr(28);
+        font-size: pr(20);
+        font-weight: 600;
+        color: #ffffff;
+        text-shadow: 0 pr(1) pr(2) #5ac053;        
+        background-image: linear-gradient(to bottom, #8ede88, #55c34e);
+        box-shadow: 0 pr(5.5) pr(12.5) 0 rgba(6, 82, 228, 0.6);
+        &:active{
+            opacity: 0.9;
+        }
+    }
+    .auth-failToast{
+        @include flex;
+        flex-direction: column;
+        justify-content: center;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: pr(196.5);
+        height: pr(118);
+        border-radius: pr(12);
+        background-color: rgba(60, 60, 60, 0.9);
+        .fail-title{
+            line-height: pr(29.5);
+            font-size: pr(21);
+            font-weight: 600;
+            color: #ffffff;            
+        }
+        .fail-subtitle{
+            margin-top: pr(3.5);
+            line-height: pr(21);
+            opacity: 0.76;
+            font-size: pr(15);
+            text-align: left;
+            color: #ffffff;            
+        }
+    }
+}
+</style>

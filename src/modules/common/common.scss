@@ -1,0 +1,14 @@
+@mixin flex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+@mixin oneLine {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+@function pr($px){
+    @return $px * 2 + rpx;
+}
